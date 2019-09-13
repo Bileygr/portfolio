@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Meta -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- CSS -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="{% static "css/core.css" %}">
+		
+		<title>Cheik Keita</title>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="header">
+				<nav>
+					<ul>
+						<li><a href="{{ hostname }}">Accueil</a></li>
+						<li><a>Formation</a></li>
+						<li><a>Expérience</a></li>
+						<li class="selected"><a>Veille technologique</a></li>
+						<li><a href="{% static "docs/curriculum-vitae.pdf" %}" target="_blank">Curriculum vitae</a></li>
+						<li><a href="http://127.0.0.1:8000/admin">Connexion</a></li>
+					</ul>
+				</nav>
+			</div>
+
+			<div class="content">
+				<h2 class="name">Veille Technologique</h2>
+
+				<?xml version="1.0" encoding="UTF-8" ?>
+				<rss version="2.0">
+					<channel>
+				  		<title>W3Schools Home Page</title>
+				  		<link>https://www.w3schools.com</link>
+				  		<description>Free web building tutorials</description>
+				  		<item>
+				    		<title>RSS Tutorial</title>
+				    		<link>https://www.w3schools.com/xml/xml_rss.asp</link>
+				    		<description>New RSS tutorial on W3Schools</description>
+				  		</item>
+				  		<item>
+				    		<title>XML Tutorial</title>
+				    		<link>https://www.w3schools.com/xml</link>
+				    		<description>New XML tutorial on W3Schools</description>
+				  		</item>
+					</channel>
+				</rss>
+			</div>
+
+			<div class="footer">
+				<footer>
+					<p> &copy; Cheik-Siramakan Keita 2018-2019 | <a href="mentions-legal">Mentions Legal</a></p>
+				</footer>
+			</div>
+		</div>
+	</body>
+</html>

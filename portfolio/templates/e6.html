@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Meta -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- CSS -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="{% static "css/core.css" %}">
+		
+		<title>Cheik Keita</title>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="header">
+				<nav>
+					<ul>
+						<li><a href="{{ hostname }}">Accueil</a></li>
+						<li class="selected"><a>Formation</a></li>
+						<li><a>Expérience</a></li>
+						<li><a>Veille technologique</a></li>
+						<li><a href="{% static "docs/curriculum-vitae.pdf" %}" target="_blank">Curriculum vitae</a></li>
+						<li><a href="{{ hostname }}admin">Connexion</a></li>
+					</ul>
+				</nav>
+			</div>
+
+			<div class="content">
+				<h2 class="name">E6</h2>
+
+				<a href="{% static "docs/bts-sio-e6-tableau-de-synthèse-2019.pdf" %}" target="_blank">Tableau de synthèse</a>
+			</div>
+
+			<div class="footer">
+				<footer>
+					<p> &copy; Cheik-Siramakan Keita 2018-2019 | <a href="mentions-legal">Mentions Legal</a></p>
+				</footer>
+			</div>
+		</div>
+	</body>
+</html>

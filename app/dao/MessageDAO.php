@@ -1,7 +1,7 @@
 <?php
-require "conf/Connect.php";
-require "app/model/Message.php";
-require "app/dao/CRUD.php";
+require_once("conf/Connect.php");
+require_once("app/model/Message.php");
+require_once("app/dao/CRUD.php");
 
 class MessageDAO implements CRUD{
     public function create($message){

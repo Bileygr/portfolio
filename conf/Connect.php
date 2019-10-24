@@ -1,14 +1,9 @@
 <?php
 class Connect{
 	public function connexion(){
-		$host = "127.0.0.1";
-		$port = "";
-		$db = "portfolio";
-		$user = "root";
-        $password = "";
-        
+		$bdd = parse_ini_file("bdd.ini", true);
 		try{
-			$db = new PDO("mysql:host=".$host.";port=".$port.";dbname=".$db.";charset=utf8", $user, $password);
+			$db = new PDO("mysql:host=".$bdd["hote"].";port=".$bdd["port"].";dbname=".$bdd["bdd"].";charset=utf8", $bdd["utilisateur"], $bdd["mot_de_passe"]);
 		}catch(Exception $e){
 			echo "Échec lors de la connexion: ".$e->getMessage();
 		}

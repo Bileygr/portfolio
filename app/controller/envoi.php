@@ -1,5 +1,5 @@
 <?php
-require_once("app/dao/MessageDAO.php");
+require_once("../dao/MessageDAO.php");
 
 if(isset($_POST["envoyer"])){
     $messageDAO = new MessageDAO;

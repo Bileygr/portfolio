@@ -3,10 +3,10 @@ class Moteur{
 	private $variables = array();
     
 	public function assigner($parametre, $valeur){
-		$this->variables[$parameter] = $valeur;
+		$this->variables[$parametre] = $valeur;
     }
     
-	public function presenter($template){
+	public function afficher($template){
 		$repertoire = "app/template/";
 		if(file_exists($repertoire.$template)){
 			$contenu = file_get_contents($repertoire.$template);
@@ -19,5 +19,6 @@ class Moteur{
 		}else{
 			exit('<h1 style="color: red;">Erreur cette template n\'existe pas.</h1>');
 		}
-    }
+	}
+}
 ?>

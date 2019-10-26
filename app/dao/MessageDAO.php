@@ -1,7 +1,5 @@
 <?php
-require_once("../../conf/Connect.php");
-require_once("../model/Message.php");
-require_once("CRUD.php");
+require_once("app/imports.php");
 
 class MessageDAO implements CRUD{
     public function create($message){
@@ -16,29 +14,42 @@ class MessageDAO implements CRUD{
     public function read($champ, $valeur){
         $connect = new Connect();
         $connexion = $connect->connexion();
+
+        $i = 0;
+        $messages = array();
+        $message = null;
+        $sql = "";
         $requete = null;
         
-        switch ($champ){
-            case "id":
-                $requete = $connexion->prepare("SELECT * FROM message WHERE id = :id");
-                $requete->execute(["id"=>$valeur]);
-            case "nom":
-                $requete = $connexion->prepare("SELECT * FROM message WHERE nom = :nom");
-                $requete->execute(["nom"=>$valeur]);
-            case "email":
-                $requete = $connexion->prepare("SELECT * FROM message WHERE email = :email");
-                $requete->execute(["email"=>$valeur]);
-            case "message":
-                $requete = $connexion->prepare("SELECT * FROM message WHERE message = :message");
-                $requete->execute(["message"=>$valeur]);
-            case "dateajout":
-                $requete = $connexion->prepare("SELECT * FROM message WHERE dateajout = :dateajout");
-                $requete->execute(["dateajout"=>$valeur]);
+        switch($champ){
+            case "":
+                $sql = "SELECT * FROM message";
+                $requete = $connexion->prepare($sql);
+                $requete->execute();
+                break;
             default:
-            $requete = $connexion->prepare("SELECT * FROM message")->execute();
+                $sql = "SELECT * FROM message WHERE ".$champ."=?";
+                $requete = $connexion->prepare($sql);
+                $requete->execute([$valeur]);
+                break;
         }
 
-        return $requete->fetchAll();
+        $lignes = $requete->fetchAll();
+
+        foreach($lignes as $ligne){
+            $message = new Message(
+                $ligne["id"],
+                $ligne["nom"],
+                $ligne["email"],
+                $ligne["message"],
+                $ligne["dateajout"]
+            );
+
+            $messages[$i] = $message;
+            $i++;
+        }
+
+        return $messages;
 		$requete = null;
 		$connexion = null;
     }

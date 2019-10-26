@@ -1,14 +1,12 @@
 <?php
-require_once("CRUD.php");
-require_once("../model/Utilisateur.php");
-require_once("../../conf/Connect.php");
+require_once("app/imports.php");
 
 class UtilisateurDAO implements CRUD{
     public function create($utilisateur){
         $connect = new Connect();
 		$connexion = $connect->connexion();
 		$requete = $connexion->prepare("INSERT INTO utilisateur(nom, prenom, mot_de_passe, email, telephone, dateajout) VALUES(:nom, :prenom, :mot_de_passe, :email, :telephone, NOW())");
-		$requete->execute(["nom"=>$utilisateur->getNom(), "prenom"=>$utilisateur->getPrenom(), "mot_de_passe"=>$utilisateur->getMotdepasse(), "email"=>$utilisateur->getEmail(), "telephone"=>$utiliateur->getTelephone()]);
+		$requete->execute(["nom"=>$utilisateur->getNom(), "prenom"=>$utilisateur->getPrenom(), "mot_de_passe"=>$utilisateur->getMotdepasse(), "email"=>$utilisateur->getEmail(), "telephone"=>$utilisateur->getTelephone()]);
 		$requete = null;
 		$connexion = null;
     }
@@ -16,35 +14,44 @@ class UtilisateurDAO implements CRUD{
     public function read($champ, $valeur){
         $connect = new Connect();
         $connexion = $connect->connexion();
+
+        $i = 0;
+        $utilisateurs = array();
+        $utilisateur = null;
+        $sql = "";
         $requete = null;
         
-        switch ($champ){
-            case "id":
-                $requete = $connexion->prepare("SELECT * FROM utilisateur WHERE id = :id");
-                $requete->execute(["id"=>$valeur]);
-            case "nom":
-                $requete = $connexion->prepare("SELECT * FROM utilisateur WHERE nom = :nom");
-                $requete->execute(["nom"=>$valeur]);
-            case "prenom":
-                $requete = $connexion->prepare("SELECT * FROM utilisateur WHERE prenom = :prenom");
-                $requete->execute(["prenom"=>$valeur]);
-            case "mot_de_passe":
-                $requete = $connexion->prepare("SELECT * FROM utilisateur WHERE mot_de_passe = :mot_de_passe");
-                $requete->execute(["mopt_de_passe"=>$valeur]);    
-            case "email":
-                $requete = $connexion->prepare("SELECT * FROM utilisateur WHERE email = :email");
-                $requete->execute(["email"=>$valeur]);
-            case "telephone":
-                $requete = $connexion->prepare("SELECT * FROM utilisateur WHERE telephone = :telephone");
-                $requete->execute(["telephone"=>$valeur]);
-            case "dateajout":
-                $requete = $connexion->prepare("SELECT * FROM utilisateir WHERE dateajout = :dateajout");
-                $requete->execute(["dateajout"=>$valeur]);
+        switch($champ){
+            case "":
+                $sql = "SELECT * FROM utilisateur";
+                $requete = $connexion->prepare($sql);
+                $requete->execute();
+                break;
             default:
-            $requete = $connexion->prepare("SELECT * FROM utilisateur")->execute();
+                $sql = "SELECT * FROM utilisateur WHERE ".$champ."=?";
+                $requete = $connexion->prepare($sql);
+                $requete->execute([$valeur]);
+                break;
         }
 
-        return $requete->fetchAll();
+        $lignes = $requete->fetchAll();
+
+        foreach($lignes as $ligne){
+            $utilisateur = new Utilisateur(
+                $ligne["id"],
+                $ligne["nom"],
+                $ligne["prenom"],
+                $ligne["mot_de_passe"],
+                $ligne["email"],
+                $ligne["telephone"],
+                $ligne["dateajout"]
+            );
+
+            $utilisateurs[$i] = $utilisateur;
+            $i++;
+        }
+
+        return $utilisateurs;
 		$requete = null;
 		$connexion = null;
     }

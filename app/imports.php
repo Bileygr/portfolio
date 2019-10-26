@@ -1,0 +1,9 @@
+<?php
+require("app/Moteur.php");
+require("app/model/Message.php");
+require("app/model/Utilisateur.php");
+require("app/dao/CRUD.php");
+require("app/dao/MessageDAO.php");
+require("app/dao/UtilisateurDAO.php");
+require("conf/Connect.php");
+?>

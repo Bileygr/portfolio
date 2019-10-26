@@ -6,10 +6,12 @@ class Message {
     private $message;
     private $dateajout;
 
-    function __construct($nom, $email, $message){
+    function __construct($id, $nom, $email, $message, $dateajout){
+        $this->id = $id;
         $this->nom = $nom;
         $this->email = $email;
         $this->message = $message;
+        $this->dateajout = $dateajout;
     }
 
     public function getId(){

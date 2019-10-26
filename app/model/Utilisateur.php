@@ -8,12 +8,14 @@ class Utilisateur{
     private $telephone;
     private $dateajout;
 
-    public function __construct($nom, $prenom, $mot_de_passe, $email, $telephone){
+    public function __construct($id, $nom, $prenom, $mot_de_passe, $email, $telephone, $dateajout){
+        $this->id = $id;
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->mot_de_passe = $mot_de_passe;
         $this->email = $email;
         $this->telephone = $telephone;
+        $this->dateajout = $dateajout;
     }
 
     public function getId(){
